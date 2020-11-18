@@ -47,13 +47,15 @@ export default function App() {
         />
       </View>
       <View style={styles.container}>
-        {state.map((item) => (
-          <Text>{item.id}</Text>
-        ))}
+        <ListTodos data={value.state} />
       </View>
     </DataContext.Provider>
   );
 }
+
+const ListTodos = ({ data }) => {
+  return data.map((item) => <Text>{item.id}</Text>);
+};
 
 const styles = StyleSheet.create({
   container: {
