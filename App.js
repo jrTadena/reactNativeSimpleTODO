@@ -54,7 +54,11 @@ export default function App() {
 }
 
 const ListTodos = ({ data }) => {
-  return data.map((item) => <Text>{item.id}</Text>);
+  return data.map((item) => <ItemTodos key={item.id} {...item} />);
+};
+
+const ItemTodos = ({ id }) => {
+  return <Text>{id}</Text>;
 };
 
 const styles = StyleSheet.create({
