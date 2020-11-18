@@ -77,7 +77,7 @@ const ListTodos = ({ dataState }) => {
 
 const ItemTodos = ({ id, text, completed }) => {
   const dispatch = useContext(DataContext);
-  const value = useMemo(() => dispatch, dispatch);
+  const value = useMemo(() => dispatch, [dispatch]);
   return (
     <View style={styles.listTodosContainer}>
       <View style={styles.switchContainer}>
