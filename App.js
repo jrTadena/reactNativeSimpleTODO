@@ -20,6 +20,9 @@ const reducer = (state, action) => {
         },
       ];
     }
+    case 'delete': {
+      return state.filter((item) => item.id !== action.payload);
+    }
   }
 };
 
@@ -48,17 +51,19 @@ export default function App() {
         />
       </View>
       <View style={styles.container}>
-        <ListTodos data={value.state} />
+        <ListTodos dataState={value.state} />
       </View>
     </DataContext.Provider>
   );
 }
 
-const ListTodos = ({ data }) => {
-  return data.map((item) => <ItemTodos key={item.id} {...item} />);
+const ListTodos = ({ dataState }) => {
+  return dataState.map((item) => <ItemTodos key={item.id} {...item} />);
 };
 
 const ItemTodos = ({ id, text, completed }) => {
+  const dispatch = useContext(DataContext);
+  const value = useMemo(() => dispatch, dispatch);
   return (
     <View style={styles.listTodosContainer}>
       <View style={styles.switchContainer}>
@@ -72,7 +77,12 @@ const ItemTodos = ({ id, text, completed }) => {
         <TextInput style={styles.textInput} placeholder='To Do' />
       </View>
       <View style={styles.buttonContainer}>
-        <Button style={styles.button} color='magenta' title='Delete' />
+        <Button
+          style={styles.button}
+          color='magenta'
+          title='Delete'
+          onPress={() => value.dispatch({ type: 'delete', payload: id })}
+        />
       </View>
     </View>
   );
