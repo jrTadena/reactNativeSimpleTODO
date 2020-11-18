@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, createContext } from 'react';
+import React, { useReducer, useMemo, useContext, createContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -27,13 +27,21 @@ const DataContext = createContext();
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, []);
+  const value = useMemo(
+    () => ({
+      state,
+      dispatch,
+    }),
+    [state, dispatch]
+  );
+
   return (
-    <DataContext.Provider value={dispatch}>
+    <DataContext.Provider value={value}>
       <View style={styles.container}>
         <Text>Simple TODO App</Text>
         <Button
           onPress={() => {
-            dispatch({ type: 'add' });
+            value.dispatch({ type: 'add' });
           }}
           title='Add TODO'
         />
