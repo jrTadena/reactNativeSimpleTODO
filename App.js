@@ -44,6 +44,7 @@ export default function App() {
             value.dispatch({ type: 'add' });
           }}
           title='Add TODO'
+          color='gray'
         />
       </View>
       <View style={styles.container}>
@@ -59,15 +60,19 @@ const ListTodos = ({ data }) => {
 
 const ItemTodos = ({ id, text, completed }) => {
   return (
-    <View>
-      <View>
-        <Switch />
+    <View style={styles.listTodosContainer}>
+      <View style={styles.switchContainer}>
+        <Switch
+          trackColor={{ false: 'lightgray', true: 'magenta' }}
+          thumbColor={completed ? 'magenta' : 'lightgray'}
+          ios_backgroundColor='lightgray'
+        />
       </View>
-      <View>
-        <TextInput />
+      <View style={styles.textInputContainer}>
+        <TextInput style={styles.textInput} placeholder='To Do' />
       </View>
-      <View>
-        <Button />
+      <View style={styles.buttonContainer}>
+        <Button style={styles.button} color='magenta' title='Delete' />
       </View>
     </View>
   );
@@ -78,5 +83,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  listTodosContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 5,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'lightgray',
+  },
+  switchContainer: {
+    marginRight: 5,
+    paddingTop: 5,
+  },
+  textInputContainer: {
+    marginRight: 5,
+    marginLeft: 5,
+    paddingTop: 8,
+  },
+  textInput: {
+    color: 'gray',
+  },
+  buttonContainer: {
+    marginLeft: 5,
   },
 });
