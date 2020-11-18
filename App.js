@@ -1,4 +1,10 @@
-import React, { useReducer, useMemo, useContext, createContext } from 'react';
+import React, {
+  useState,
+  useReducer,
+  useMemo,
+  useContext,
+  createContext,
+} from 'react';
 import {
   StyleSheet,
   Text,
@@ -15,7 +21,7 @@ const reducer = (state, action) => {
         ...state,
         {
           id: Date.now(),
-          text: '',
+          text: action.text,
           completed: false,
         },
       ];
@@ -76,6 +82,7 @@ const ListTodos = ({ dataState }) => {
 };
 
 const ItemTodos = ({ id, text, completed }) => {
+  const [intext, setInText] = useState(null);
   const dispatch = useContext(DataContext);
   const value = useMemo(() => dispatch, dispatch);
   return (
