@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useReducer,
-  useMemo,
-  useContext,
-  createContext,
-} from 'react';
+import React, { useReducer, useMemo, useContext, createContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -21,7 +15,7 @@ const reducer = (state, action) => {
         ...state,
         {
           id: Date.now(),
-          text: action.text,
+          text: '',
           completed: false,
         },
       ];
@@ -82,7 +76,6 @@ const ListTodos = ({ dataState }) => {
 };
 
 const ItemTodos = ({ id, text, completed }) => {
-  const [intext, setInText] = useState(null);
   const dispatch = useContext(DataContext);
   const value = useMemo(() => dispatch, dispatch);
   return (
@@ -99,7 +92,7 @@ const ItemTodos = ({ id, text, completed }) => {
         />
       </View>
       <View style={styles.textInputContainer}>
-        <TextInput style={styles.textInput} placeholder='To Do' />
+        <TextInput style={styles.textInput} placeholder='To Do' value={text} />
       </View>
       <View style={styles.buttonContainer}>
         <Button
