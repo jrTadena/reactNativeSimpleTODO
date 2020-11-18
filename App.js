@@ -57,8 +57,20 @@ const ListTodos = ({ data }) => {
   return data.map((item) => <ItemTodos key={item.id} {...item} />);
 };
 
-const ItemTodos = ({ id }) => {
-  return <Text>{id}</Text>;
+const ItemTodos = ({ id, text, completed }) => {
+  return (
+    <View>
+      <View>
+        <Switch />
+      </View>
+      <View>
+        <TextInput />
+      </View>
+      <View>
+        <Button />
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
